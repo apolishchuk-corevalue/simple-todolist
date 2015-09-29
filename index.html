@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Simple ToDoList</title>
+    <link rel="stylesheet" href="all.css"/>
+</head>
+<body>
+    <section class="todoapp">
+        <header class="header">
+            <h1>ToDoList</h1>
+
+            <form action="#" method="post">
+                <input class="new-todo"  id="new-todo" type="text" placeholder="What needs to be done?"/>
+                <!--<button class="new-todo-add">Add</button>-->
+            </form>
+        </header>
+        <section class="main">
+            <ul class="todo-list" id="todo-list"></ul>
+        </section>
+        <footer class="footer" style="display: block;">
+            <!--<span class="todo-count"><strong>0</strong> items left</span>-->
+            <ul class="filters">
+                <li>
+                    <a class="selected" href="#/">All</a>
+                </li>
+                <li>
+                    <a href="#/active">Active</a>
+                </li>
+                <li>
+                    <a href="#/completed">Completed</a>
+                </li>
+            </ul>
+            <a class="clear-completed" href="">Clear completed</a>
+        </footer>
+    </section>
+
+    <script src="main.js"></script>
+</body>
+</html>

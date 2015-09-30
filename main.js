@@ -24,15 +24,10 @@
   }, false);
 
   todo.addEventListener( 'click', function( e ) {
-    var itemId,
-        t = e.target;
-        itemLi = t.parentNode.parentNode;
-    for (var i in todo.childNodes) {
-      if (todo.childNodes[i] === itemLi) {
-        itemId = i;
-        break
-      }
-    }
+    var t = e.target,
+        itemLi = t.parentNode.parentNode,
+        itemId = itemLi.getAttribute('data-index');
+    todo.children[itemId].classList.remove('editing');
 
     // destroy item in list
     if ( t.className === 'destroy' ) {
@@ -56,18 +51,10 @@
 
   // edit list item
   todo.addEventListener( 'dblclick', function( e ) {
-    var itemId,
-        t = e.target,
-        itemLi = t.parentNode.parentNode;
-
-    for (var i = 0; i < todo.childNodes.length; i++) {
-      if (todo.childNodes[i] === itemLi) {
-        itemId = i;
-      }
-      if (todo.children[i].classList.contains('editing') === true) {
-        todo.children[i].classList.remove('editing');
-      }
-    }
+    var t = e.target,
+        itemLi = t.parentNode.parentNode,
+        itemId = itemLi.getAttribute('data-index');
+    todo.children[itemId].classList.remove('editing');
 
     if ( t.tagName === 'LABEL' ) {
       var inputEdit = itemLi.querySelector( '.edit' );

@@ -48,7 +48,7 @@
         items[itemId].state = 2;
       } else {
         items[itemId].state = 1;
-      };
+      }
     }
 
     storestate();
@@ -123,7 +123,7 @@
   function filterRedraw (stateView) {
     todo.innerHTML = '';
     retrievestate(stateView);
-  };
+  }
 
   // add item to list
   function addItem(count, value, state) {
@@ -134,27 +134,27 @@
       checked = 'checked';
     }
     todo.innerHTML += '<li class="'+ completed +'"><div class="view"><input id="todolist-item-'+ count +'" class="toggle" type="checkbox" '+ checked +' /><label for="1todolist-item-'+ count +'">' + value + '</label><button class="destroy"></button></div><input type="text" value="'+ value +'" class="edit"></li>';
-  };
+  }
 
   // add to localStorage items state
   function storestate() {
     localStorage.todolist = JSON.stringify(items);
-  };
+  }
 
   // retrieve from localStorage items state
   function retrievestate(stateView) {
     if ( localStorage.todolist ) {
       items = JSON.parse(localStorage.todolist);
       for (var i = 0; i < items.length; i++) {
-        if (stateView == true) {
+        if (stateView == 1 || stateView == 2) {
           if (stateView === items[i].state){
             addItem(i, items[i].value, items[i].state);
           }
         } else {
           addItem(i, items[i].value, items[i].state);
         }
-      };
+      }
     }
-  };
+  }
   document.addEventListener( 'DOMContentLoaded', retrievestate(), false );
 })();

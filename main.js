@@ -14,9 +14,9 @@
 
   // add todoitem
   form.addEventListener( 'submit', function( e ) {
-    var state = 0;
-    addItem(items.length + 1, field.value, state);
-    items.push({value: field.value, state: state});
+    var completed = false;
+    addItem(items.length + 1, field.value, completed);
+    items.push({value: field.value, completed: completed});
     field.value = '';
     field.focus();
     storestate();
@@ -39,11 +39,7 @@
     // toggle checked status
     if ( t.className === 'toggle' ) {
       itemLi.classList.toggle( 'completed' );
-      if (items[itemId].state == 0) {
-        items[itemId].state = 1;
-      } else {
-        items[itemId].state = 0;
-      }
+      items[itemId].completed = !items[itemId].completed;
     }
 
     storestate();
@@ -63,7 +59,6 @@
           items[itemId].value = ev.target.value;
           todo.childNodes[itemId].classList.remove('editing');
           storestate();
-          console.log(items);
           todo.innerHTML = '';
           drawList();
         }
@@ -77,9 +72,9 @@
     var t = e.target;
     
     if (t.hash === '#/active') {
-      filterRedraw(0);
+      filterRedraw(false);
     } else if (t.hash === '#/completed') {
-      filterRedraw(1);
+      filterRedraw(true);
     } else {
       filterRedraw();
     }
@@ -96,7 +91,7 @@
 
   clearCompleted.addEventListener( 'click', function( e ) {
     for (var i = 0; i < items.length; i++) {
-      if (items[i].state == true) {
+      if (items[i].completed === true) {
         items.splice(i, 1);
         i--;
       }
@@ -107,33 +102,33 @@
     e.preventDefault();
   }, false);
 
-  function filterRedraw (stateView) {
+  function filterRedraw (completed) {
     todo.innerHTML = '';
-    drawList(stateView);
+    drawList(completed);
   }
 
   // draw list
-  function drawList(stateView) {
+  function drawList(completed) {
     for (var i = 0; i < items.length; i++) {
-      if (typeof stateView != 'undefined') {
-        if (stateView == items[i].state){
-          addItem(i, items[i].value, items[i].state);
+      if (typeof completed !== 'undefined') {
+        if (completed === items[i].completed){
+          addItem(i, items[i].value, items[i].completed);
         }
       } else {
-        addItem(i, items[i].value, items[i].state);
+        addItem(i, items[i].value, items[i].completed);
       }
     }
   }
 
   // add item to list
-  function addItem(count, value, state) {
-    var completed = "",
+  function addItem(count, value, completed) {
+    var complete = "",
       checked = "";
-    if (state == true) {
-      completed = 'completed';
+    if (completed === true) {
+      complete = 'completed';
       checked = 'checked';
     }
-    todo.innerHTML += '<li data-index="'+ count +'" class="'+ completed +'"><div class="view"><input class="toggle" type="checkbox" '+ checked +' /><label>' + value + '</label><button class="destroy"></button></div><input type="text" value="'+ value +'" class="edit"></li>';
+    todo.innerHTML += '<li data-index="'+ count +'" class="'+ complete +'"><div class="view"><input class="toggle" type="checkbox" '+ checked +' /><label>' + value + '</label><button class="destroy"></button></div><input type="text" value="'+ value +'" class="edit"></li>';
   }
 
   // add to localStorage items state
@@ -145,8 +140,10 @@
   function retrievestate() {
     if ( localStorage.todolist ) {
       items = JSON.parse(localStorage.todolist);
-      drawList();
     }
   }
-  document.addEventListener( 'DOMContentLoaded', retrievestate(), false );
+  document.addEventListener( 'DOMContentLoaded', function( e ) {
+    retrievestate();
+    drawList();
+  }, false );
 })();

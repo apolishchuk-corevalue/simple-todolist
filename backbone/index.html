@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>TodoList Backbone.js</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <a href="#" class="to-home btn hidden">Back</a>
+    <section id="todoapp" class="todoapp">
+        <h1>ToDoList</h1>
+        <header id="header">
+            <form action="#">
+                <input id="new-todo" placeholder="What needs to be done?" class="edit" autofocus>
+                <textarea name="" id="new-todo-description" cols="30" rows="4" class="edit" placeholder="What needs to be done description?"></textarea>
+                <button type="submit" class="create btn" id="create-todo">Create</button>
+                <a href="#list" class="btn right">List</a>
+            </form>
+            <div class="message error hidden">Please fill out all fields completely.</div>
+        </header>
+        <section id="main">
+            <ul id="todo-list"></ul>
+        </section>
+        <footer id="footer">
+            <input id="mark-toogle-input" type="checkbox" class="hidden">
+            <button id="mark-toogle" class="left">Mark toggle</button>
+            <button id="delete-all">Delete all</button>
+            <button id="clear-completed" class="right">Clear completed</button>
+        </footer>
+    </section>
+    <section  class="todoapp ">
+        <div id="item-description-hold" class="todoapp-desc"></div>
+    </section>
+    <footer id="info">
+        <p>Double-click to edit a todo</p>
+    </footer>
+    <script type="text/template" id="item-template">
+        <div class="view">
+            <input class="toggle" type="checkbox" <%= completed ? 'checked' : '' %> />
+            <label ><a href="#task/<%- order %>"><%- name %></a></label>
+            <button class="destroy"></button>
+        </div>
+    </script>
+    <script type="text/template" id="item-description">
+        <h1>ToDoList</h1>
+        <div class="view">
+            <div class="row">Task Name: <%- name %></div>
+            <div class="row">
+                Status: <%= completed ? 'done' : 'undone' %>
+            </div>
+            <div class="row">Task number: <%- order %></div>
+            <div class="row">Task description: <%- description %></div>
+        </div>
+    </script>
+
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/underscore/underscore.js"></script>
+    <script src="node_modules/backbone/backbone.js"></script>
+    <script src="node_modules/backbone.localstorage/backbone.localStorage.js"></script>
+    <script src="js/models/taskModel.js"></script>
+    <script src="js/collections/taskCollection.js"></script>
+    <script src="js/views/tasksListView.js"></script>
+    <script src="js/views/taskListItemView.js"></script>
+    <script src="js/views/taskDescView.js"></script>
+    <script src="js/routers/router.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

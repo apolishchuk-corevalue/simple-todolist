@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="/index.css">
 </head>
 <body>
-    <a href="#" class="to-home btn hidden">Back</a>
     <section id="todoapp" class="todoapp">
         <h1>ToDoList</h1>
+        <a href="#" class="to-home btn">Home</a>
         <header id="header">
             <form action="#">
                 <input id="new-todo" placeholder="What needs to be done?" class="edit" autofocus>
@@ -29,8 +29,10 @@
             <button id="clear-completed" class="right">Clear completed</button>
         </footer>
     </section>
-    <section  class="todoapp ">
-        <div id="item-description-hold" class="todoapp-desc"></div>
+    <section id="item-description-hold" class="todoapp hidden">
+        <h1>ToDoList</h1>
+        <a href="#" class="to-home btn">Back</a>
+        <div class="todoapp-desc"></div>
     </section>
     <footer id="info">
         <p>Double-click to edit a todo</p>
@@ -43,7 +45,6 @@
         </div>
     </script>
     <script type="text/template" id="item-description">
-        <h1>ToDoList</h1>
         <div class="view">
             <div class="row">Task Name: <%- name %></div>
             <div class="row">

@@ -14,20 +14,16 @@ var app = app || {};
     index: function () {
       console.log('index');
 
-      $('#todoapp').show();
+      this.changeVisibleElements();
       $('#header').show();
-      $('.todoapp-desc').hide();
-      $('.to-home').hide();
     },
     taskDescriptionView: function (order) {
       console.log('task description');
 
       $('#todoapp').hide();
-      $('.todoapp-desc').show();
-      $('.to-home').show();
+      $('#item-description-hold').show();
 
       var item = app.todos.findWhere({order: parseInt(order)});
-      console.log(order, item);
       if (item) {
         this.taskDescriptionView = new app.taskDescView({model: item}).render();
       } else {
@@ -36,11 +32,13 @@ var app = app || {};
     },
     tasksListView: function () {
       console.log('list');
-
-      $('#todoapp').show();
+      this.changeVisibleElements();
       $('#header').hide();
-      $('.todoapp-desc').hide();
-      $('.to-home').show();
+    },
+
+    changeVisibleElements: function () {
+      $('#todoapp').show();
+      $('#item-description-hold').hide();
     }
   });
 

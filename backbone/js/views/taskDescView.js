@@ -5,7 +5,7 @@ var app = app || {};
   'use strict';
 
   app.taskDescView = Backbone.View.extend({
-    el: '#item-description-hold',
+    el: '.todoapp-desc',
 
     template: _.template($('#item-description').html()),
 

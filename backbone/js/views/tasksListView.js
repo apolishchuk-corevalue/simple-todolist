@@ -29,10 +29,7 @@ var app = app || {};
     },
 
     render: function () {
-      $('#todoapp').show();
-      $('#header').show();
-      $('.todoapp-desc').hide();
-      $('.to-home').hide();
+
     },
 
     addOne: function (todo) {
